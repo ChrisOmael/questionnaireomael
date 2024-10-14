@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Besoins Énergétiques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Police */
+            margin: 20px;
+            background-color: #000; /* Fond noir */
+            color: #fff; /* Texte blanc */
+            line-height: 1.6; /* Hauteur de ligne pour améliorer la lisibilité */
+        }
+        h2 {
+            color: gold; /* Titre en or */
+            text-align: center; /* Centrer le titre */
+        }
+        .logo {
+            display: block; /* Afficher le logo comme un bloc */
+            margin: 0 auto; /* Centrer le logo */
+            max-width: 150px; /* Largeur maximale du logo */
+        }
+        .question {
+            margin-bottom: 15px;
+            background-color: #333; /* Couleur de fond des questions */
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Ombre légère */
+        }
+        button {
+            background-color: gold; /* Couleur du bouton en or */
+            color: black; /* Texte du bouton en noir */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px; /* Coins arrondis */
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%; /* Bouton de largeur complète */
+            box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+        }
+        button:hover {
+            background-color: #ffd700; /* Couleur du bouton au survol */
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #333; /* Couleur de fond du résultat */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+        .buy-button {
+            display: block;
+            margin-top: 10px;
+            background-color: gold;
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center; /* Centrer le texte du bouton */
+        }
+        .buy-button:hover {
+            background-color: #ffd700;
+        }
+        /* Styles responsive */
+        @media (max-width: 600px) {
+            .question {
+                padding: 10px; /* Réduire le padding pour les petits écrans */
+            }
+            button {
+                font-size: 14px; /* Réduire la taille de la police du bouton */
+            }
+            .result {
+                padding: 10px; /* Réduire le padding pour le résultat */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Calculateur de Besoins Énergétiques - Lithothérapie</h2>
+    <p style="text-align: center; font-style: italic; color: gold;">Omaël Bien-être</p>
+    
+    <img src="logo.png" alt="Logo de votre entreprise" class="logo"> 
+
+    <div id="quiz">
+        <div class="question">
+            <p><strong>1. Quel est votre principal objectif en ce moment ?</strong></p>
+            <label><input type="checkbox" value="confiance"> Améliorer ma confiance en moi</label><br>
+            <label><input type="checkbox" value="amour"> Apporter plus d’amour et d’harmonie dans ma vie</label><br>
+            <label><input type="checkbox" value="energie"> Augmenter ma vitalité et mon énergie</label><br>
+            <label><input type="checkbox" value="calme"> Réduire mon stress et améliorer mon calme intérieur</label><br>
+            <label><input type="checkbox" value="protection"> Renforcer ma protection et mon ancrage</label><br>
+            <label><input type="checkbox" value="creativite"> Améliorer ma créativité et mon intuition</label><br>
+        </div>
+
+        <div class="question">
+            <p><strong>2. Comment vous sentez-vous émotionnellement ces derniers temps ?</strong></p>
+            <label><input type="checkbox" value="calme"> Souvent anxieux(se) ou stressé(e)</label><br>
+            <label><input type="checkbox" value="confiance"> Manquant de confiance en mes capacités</label><br>
+            <label><input type="checkbox" value="creativite"> Débordant(e) d’idées mais difficilement organisé(e)</label><br>
+            <label><input type="checkbox" value="amour"> En recherche d’harmonie dans mes relations</label><br>
+            <label><input type="checkbox" value="energie"> Fatigué(e) ou en manque d’énergie</label><br>
+            <label><input type="checkbox" value="spirituel"> Équilibré(e), mais je souhaite approfondir ma spiritualité</label><br>
+        </div>
+
+        <div class="question">
+            <p><strong>3. Quel aspect de votre bien-être souhaitez-vous renforcer ?</strong></p>
+            <label><input type="checkbox" value="amour"> Émotionnel (apaiser mes émotions, harmoniser mes relations)</label><br>
+            <label><input type="checkbox" value="creativite"> Mental (améliorer la concentration, la créativité)</label><br>
+            <label><input type="checkbox" value="energie"> Physique (boost d’énergie, santé générale)</label><br>
+            <label><input type="checkbox" value="spirituel"> Spirituel (connexion spirituelle, méditation, intuition)</label><br>
+            <label><input type="checkbox" value="protection"> Protection (se sentir plus en sécurité, mieux ancré)</label><br>
+        </div>
+
+        <button onclick="calculerBesoins()">Calculer mes besoins énergétiques</button>
+
+        <div id="resultat" class="result"></div>
+    </div>
+
+    <script>
+        function calculerBesoins() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            var selectedValues = [];
+            
+            checkboxes.forEach(function(checkbox) {
+                selectedValues.push(checkbox.value);
+            });
+
+            var pierres = {
+                confiance: {
+                    nom: "Citrine",
+                    vertu: "Elle favorise la confiance en soi, la motivation et l'énergie positive."
+                },
+                amour: {
+                    nom: "Quartz Rose",
+                    vertu: "Pierre de l'amour inconditionnel, elle apporte harmonie et paix intérieure."
+                },
+                energie: {
+                    nom: "Grenat",
+                    vertu: "Elle booste l'énergie, la vitalité et la passion."
+                },
+                calme: {
+                    nom: "Améthyste",
+                    vertu: "Elle apaise l'esprit et aide à la méditation."
+                },
+                protection: {
+                    nom: "Obsidienne",
+                    vertu: "Pierre protectrice, elle aide à éliminer les énergies négatives."
+                },
+                creativite: {
+                    nom: "Labradorite",
+                    vertu: "Stimule l'intuition et la créativité."
+                },
+                spirituel: {
+                    nom: "Fluorite",
+                    vertu: "Elle aide à la clarté mentale et à la connexion spirituelle."
+                }
+            };
+
+            // Compte des besoins énergétiques
+            var resultats = {};
+            selectedValues.forEach(function(value) {
+                resultats[value] = (resultats[value] || 0) + 1;
+            });
+
+            // Récupérer jusqu'à trois pierres recommandées
+            var pierresRecommandees = Object.keys(resultats).sort((a, b) => resultats[b] - resultats[a]).slice(0, 3);
+            var resultat = document.getElementById("resultat");
+            resultat.innerHTML = "<strong style='color: gold;'>Pierres recommandées :</strong><br>";
+
+            pierresRecommandees.forEach(function(besoin) {
+                var pierre = pierres[besoin];
+                resultat.innerHTML += "<strong>" + pierre.nom + "</strong>: " + pierre.vertu + "<br>";
+            });
+
+            // Bouton d'achat apparaissant une seule fois
+            resultat.innerHTML += "<a href='https://www.omael-bienetre.com' class='buy-button'>Acheter</a>";
+        }
+    </script>
+
+</body>
+</html>
